@@ -1,7 +1,7 @@
 $(function(){
 
-    var heightNode = 20;
-    var widthNode =  0;
+    var heightNode = 50;
+    var widthNode =  5;
 
     var LADDER = {};
     var row =0;
@@ -36,7 +36,7 @@ $(function(){
 	  $('#btn2').on('click', function(){
        
         $('.btn-3').css({
-            'display': 'none'
+            'opacity': 0
         });
       
 	
@@ -47,13 +47,13 @@ $(function(){
 	});
     function canvasDraw(){
         ladder.css({
-            'width' :( widthNode-1) * 120 + 20,
-            'height' : (heightNode -1 ) * 50 + 20,
+            'width' :( widthNode-1) * 100 + 6,
+            'height' : (heightNode -1 ) * 25 + 6,
             'background-color' : '#fff'
         });
        ladder_canvas
-       .attr('width' , ( widthNode-1) * 120 + 20)
-       .attr('height' , ( heightNode-1) * 50 + 20);
+       .attr('width' , ( widthNode-1) * 100 + 6)
+       .attr('height' , ( heightNode-1) * 25 + 6);
 
         setDefaultFootPrint();
         reSetCheckFootPrint();
@@ -124,7 +124,7 @@ $(function(){
                      setTimeout(function(){ 
 						
                          return startLineDrawing(leftNode, color)
-                     }, 100);
+                     }, 50);
                 }
                 else if(  (leftNodeInfo["change"] &&  !!!leftNodeInfo["draw"] && !!!GLOBAL_CHECK_FOOT_PRINT[leftNode] ) && (rightNodeInfo["change"]) && !!!GLOBAL_CHECK_FOOT_PRINT[rightNode] ){
                     console.log('RIGHT 우선')
@@ -132,7 +132,7 @@ $(function(){
                     console.log("right")
                     setTimeout(function(){ 
                         return startLineDrawing(rightNode, color)
-                     }, 100);
+                     }, 50);
                 }
                 else if(  (leftNodeInfo["change"] &&  leftNodeInfo["draw"] && !!!GLOBAL_CHECK_FOOT_PRINT[leftNode] ) && (!!!rightNodeInfo["change"]) ){
                     //Left우선 
@@ -140,7 +140,7 @@ $(function(){
                     stokeLine(x, y, 'w' , 'l' , color ,4)
                      setTimeout(function(){ 
                          return startLineDrawing(leftNode, color)
-                     }, 100);
+                     }, 50);
                 }
                  else if(  !!!leftNodeInfo["change"]  &&  (rightNodeInfo["change"]) && !!!GLOBAL_CHECK_FOOT_PRINT[rightNode] ){
                     //Right우선 
@@ -148,14 +148,14 @@ $(function(){
                     stokeLine(x, y, 'w' , 'r' , color ,4)
                      setTimeout(function(){ 
                          return startLineDrawing(rightNode, color)
-                     }, 100);
+                     }, 50);
                 }
                 else{
                     console.log('DOWN 우선')
                     stokeLine(x, y, 'h' , 'd' , color ,4)
                     setTimeout(function(){ 
                        return startLineDrawing(downNode, color)
-                    }, 100);
+                    }, 50);
                 }
             }else{
                 console.log('else')
@@ -168,13 +168,13 @@ $(function(){
                         stokeLine(x, y, 'w' , 'r' , color ,4)
                         setTimeout(function(){ 
                             return startLineDrawing(rightNode, color)
-                        }, 100);
+                        }, 50);
                     }else{
                         console.log('DOWN')
                         stokeLine(x, y, 'h' , 'd' , color ,4)
                         setTimeout(function(){ 
                            return startLineDrawing(downNode, color)
-                        }, 100);
+                        }, 50);
                     }
                     
                }else if(GLOBAL_FOOT_PRINT.hasOwnProperty(leftNode) && !!!GLOBAL_FOOT_PRINT.hasOwnProperty(rightNode)){      
@@ -186,13 +186,13 @@ $(function(){
                         stokeLine(x, y, 'w' , 'l' , color ,4)
                         setTimeout(function(){ 
                             return startLineDrawing(leftNode, color)
-                        }, 100);
+                        }, 50);
                     }else{
                         console.log('DOWN')
                         stokeLine(x, y, 'h' , 'd' , color ,4)
                         setTimeout(function(){ 
                            return startLineDrawing(downNode, color)
-                        }, 100);
+                        }, 50);
                     }
                }
             }
@@ -204,8 +204,9 @@ $(function(){
             stokeLine(x, y, 'h' , 'd' , color ,4)
             setTimeout(function(){ 
                 return startLineDrawing(downNode, color)
-             }, 100);
+             }, 50);
         }
+	
     }
 
 
@@ -262,7 +263,7 @@ $(function(){
         var ctx = canvas.getContext('2d');
         var moveToStart =0, moveToEnd =0, lineToStart =0 ,lineToEnd =0; 
         var eachWidth = 100; 
-        var eachHeight = 25;
+        var eachHeight = 10;
         if(flag == "w"){
             //가로줄
            
@@ -304,7 +305,7 @@ $(function(){
          for(var y =0; y < heightNode-1; y++){
             html += '<tr>';
             for(var x =0; x <widthNode-1 ; x++){
-                html += '<td style="width:98px; height:25px; border-left:2px solid #ddd; border-right:2px solid #ddd;"></td>';
+                html += '<td style="width:98px; height:10px; border-left:2px solid #ddd; border-right:2px solid #ddd;"></td>';
             }
             html += '</tr>';
         }
@@ -358,8 +359,8 @@ $(function(){
                 var node = x + "-"+ row;
                 rowArr .push(node);
                 // 노드그리기
-                var left = x * 100;
-                var top = row * 25;
+                var left = x * 50;
+                var top = row * 15;
                 var node = $('<div></div>')
                 .attr('class' ,'node')
                 .attr('id' , node)
@@ -380,4 +381,6 @@ $(function(){
 
 
 });
+
+
 
